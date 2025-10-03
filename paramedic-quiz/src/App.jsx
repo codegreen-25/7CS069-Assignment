@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
 import { AuthProvider } from './auth/AuthContext'
 import { useAuth } from './auth/AuthContext'
 import Protected from './auth/Protected'
@@ -17,10 +17,24 @@ import './App.css'
 function Nav() {
   const { user, logout } = useAuth()
   const [open, setOpen] = useState(false)
+  const menuRef = useRef(null)
+
+    // Close menu when clicking/tapping outside
+ useEffect(() => {
+    const handleOutside = (e) => {
+      if (!menuRef.current) return
+      if (!menuRef.current.contains(e.target)) setOpen(false)
+    }
+    // pointerdown works for both mouse + touch
+    document.addEventListener('pointerdown', handleOutside, { passive: true })
+    return () => document.removeEventListener('pointerdown', handleOutside)
+  }, [])
+
+  const handleLinkClick = () => setOpen(false)
 
   return (
     <header className="app-header">
-      <div className="app-header-inner">
+      <div className="app-header-inner" ref={menuRef}>
         {/* Brand / Logo */}
         <div className="brand">
           <Link to="/">CodeGreen Quiz</Link>
@@ -28,13 +42,13 @@ function Nav() {
 
         {/* Desktop links */}
         <nav className={`primary-nav ${open ? 'is-open' : ''}`}>
-          <Link to="/">Home</Link>
-          {user && <Link to="/account/flags">Flags</Link>}
-          {user && <Link to="/account/scores">My scores</Link>}
-          {!user && <Link to="/login">Login</Link>}
-          {!user && <Link to="/register">Register</Link>}
+          <NavLink to="/" onClick={handleLinkClick}>Home</NavLink>
+          {user && <NavLink to="/account/flags" onClick={handleLinkClick}>Flags</NavLink>}
+          {user && <NavLink to="/account/scores" onClick={handleLinkClick}>My scores</NavLink>}
+          {!user && <NavLink to="/login" onClick={handleLinkClick}>Login</NavLink>}
+          {!user && <NavLink to="/register" onClick={handleLinkClick}>Register</NavLink>}
           {user && (
-            <button className="logout-btn" onClick={logout}>
+            <button className="logout-btn" onClick={() => { logout(); setOpen(false) }}>
               Logout
             </button>
           )}
