@@ -5,6 +5,8 @@ use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\AttemptController;
 use App\Http\Controllers\FlagController;
 use App\Http\Controllers\TokenAuthController;
+use App\Http\Controllers\QuestionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,13 +26,13 @@ Route::post('/auth/login',    [TokenAuthController::class, 'login']);
 | The user includes  Authorization: Bearer <token>  header.
 */
 Route::middleware('auth:sanctum')->group(function () {
-    // logout simply deletes the current token
+
     Route::post('/auth/logout', [TokenAuthController::class, 'logout']);
 
-    // user profile (optional convenience endpoint)
+
     Route::get('/user', fn (\Illuminate\Http\Request $request) => $request->user());
 
-    // --- your original protected routes ---
+
     Route::get('/case-studies',            [CatalogController::class, 'index']);
     Route::get('/quizzes/{id}',            [CatalogController::class, 'quiz']);
     Route::get('/quizzes/{id}/question',   [CatalogController::class, 'singleQuestion']);
@@ -43,4 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/flags',                  [FlagController::class, 'store']);
     Route::get('/flags',                   [FlagController::class, 'index']);
     Route::delete('/flags/{question}',     [FlagController::class, 'destroyByQuestion']);
+
+    Route::get('/questions/{question}', [QuestionController::class, 'show']);   
+Route::post('/questions/{question}/check', [QuestionController::class, 'check']);
 });

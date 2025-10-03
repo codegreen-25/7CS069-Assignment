@@ -193,8 +193,8 @@
 .home-quizzes-list{ margin: 10px 0 0; padding-left: 0; list-style: none; }
 .home-quizzes-list li + li{ margin-top: 6px; }
 
-/* === Flagged List Page === */
-.flagged-page{ composes: container; } /* (if your setup doesn’t support composes, keep class duplication) */
+/* Flagged List Page */
+.flagged-page{ composes: container; }
 .flagged-list{ list-style: none; padding: 0; }
 .flagged-item{
   background: var(--surface);
@@ -209,7 +209,7 @@
 .flagged-item-stem{ margin-top: 6px; }
 .flagged-item-actions{ margin-top: 10px; display: flex; gap: 8px; }
 
-/* === My Scores Page === */
+/* My Scores Page */
 .my-scores-page{ max-width: 800px; margin: 24px auto; padding: 16px; }
 .my-scores-list{ list-style: none; padding-left: 0; }
 .my-scores-list li{
@@ -281,7 +281,7 @@
 }
 
 .quiz-run-answer.selected {
-  background: #e6f4ea; /* light green tint */
+  background: #e6f4ea; 
   border-color: var(--nhs-green);
   box-shadow: 0 0 0 3px rgba(0,150,57,0.25);
 }
@@ -289,7 +289,7 @@
 .quiz-run-error{ color: #c83532; margin-top: 8px; }
 .quiz-run-nav{ display: flex; gap: 8px; margin-top: 16px; }
 
-/* === Review Page === */
+/* Review Page */
 .review-page{ max-width: 800px; margin: 24px auto; padding: 16px; }
 .review-links{ margin: 16px 0; }
 .review-list{ padding-left: 20px; }
@@ -317,11 +317,11 @@
   align-items: flex-start;
 }
 .review-item-header .btn {
-  margin-left: auto; /* push flag button to the right */
+  margin-left: auto;
 }
 
 
-/* === Auth Pages === */
+/* Auth Pages */
 .login-page, .register-page{
   max-width: 420px;
   margin: 40px auto;
