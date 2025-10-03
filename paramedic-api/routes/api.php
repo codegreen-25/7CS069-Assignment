@@ -7,6 +7,7 @@ use App\Http\Controllers\FlagController;
 use App\Http\Controllers\TokenAuthController;
 use App\Http\Controllers\QuestionController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Public authentication routes (stateless)
@@ -25,13 +26,13 @@ Route::post('/auth/login',    [TokenAuthController::class, 'login']);
 | The user includes  Authorization: Bearer <token>  header.
 */
 Route::middleware('auth:sanctum')->group(function () {
-    // logout simply deletes the current token
+
     Route::post('/auth/logout', [TokenAuthController::class, 'logout']);
 
-    // user profile (optional convenience endpoint)
+
     Route::get('/user', fn (\Illuminate\Http\Request $request) => $request->user());
 
-    // --- your original protected routes ---
+
     Route::get('/case-studies',            [CatalogController::class, 'index']);
     Route::get('/quizzes/{id}',            [CatalogController::class, 'quiz']);
     Route::get('/quizzes/{id}/question',   [CatalogController::class, 'singleQuestion']);

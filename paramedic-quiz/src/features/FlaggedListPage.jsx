@@ -12,7 +12,7 @@ export default function FlaggedListPage() {
   }, [])
 
   const open = (q) => {
-    nav(`/quiz/${q.quiz.id}/run?jumpTo=0`) // Replace 0 with real index if available
+    nav(`/question/${q.questionId}`)
   }
 
   const unflag = async (q) => {

@@ -11,6 +11,7 @@ import QuizRunPage from './features/QuizRunPage'
 import ReviewPage from './features/ReviewPage'
 import MyScoresPage from './features/MyScoresPage'     
 import FlaggedListPage from './features/FlaggedListPage'
+import QuestionPreviewPage from './features/QuestionPreviewPage'
 import './App.css'
 
 function Nav() {
@@ -47,6 +48,7 @@ export default function App(){
           <Route path="/quiz/:quizId/review/:attemptId" element={<Protected><ReviewPage/></Protected>} />
           <Route path="/account/scores" element={<Protected><MyScoresPage/></Protected>} />
           <Route path="/account/flags" element={<Protected><FlaggedListPage/></Protected>} />
+          <Route path="/question/:questionId" element={<Protected><QuestionPreviewPage/></Protected>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
