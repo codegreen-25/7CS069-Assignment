@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { useState } from 'react'
 import { AuthProvider } from './auth/AuthContext'
 import { useAuth } from './auth/AuthContext'
 import Protected from './auth/Protected'
@@ -15,20 +16,47 @@ import './App.css'
 
 function Nav() {
   const { user, logout } = useAuth()
+  const [open, setOpen] = useState(false)
 
   return (
-     <nav className="app-nav">
-      <Link to="/">Home</Link>
-      {user && <Link to="/account/flags">Flagged Questions</Link>}
-      {user && <Link to="/account/scores">Previous Scores</Link>}
-      {!user && <Link to="/login">Login</Link>}
-      {!user && <Link to="/register">Register</Link>}
-      {user && (
-        <button className="btn btn-outline logout-btn" onClick={logout}>Logout</button>
-      )}
-    </nav>
+    <header className="app-header">
+      <div className="app-header-inner">
+        {/* Brand / Logo */}
+        <div className="brand">
+          <Link to="/">CodeGreen Quiz</Link>
+        </div>
+
+        {/* Desktop links */}
+        <nav className={`primary-nav ${open ? 'is-open' : ''}`}>
+          <Link to="/">Home</Link>
+          {user && <Link to="/account/flags">Flags</Link>}
+          {user && <Link to="/account/scores">My scores</Link>}
+          {!user && <Link to="/login">Login</Link>}
+          {!user && <Link to="/register">Register</Link>}
+          {user && (
+            <button className="logout-btn" onClick={logout}>
+              Logout
+            </button>
+          )}
+        </nav>
+
+        {/* Hamburger (mobile only) */}
+        <button
+          className={`hamburger ${open ? 'is-open' : ''}`}
+          aria-label="Menu"
+          aria-expanded={open ? 'true' : 'false'}
+          onClick={() => setOpen(v => !v)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+      </div>
+    </header>
   )
 }
+
 
 export default function App(){
   return (
