@@ -26,7 +26,12 @@ export default function QuizIntroPage() {
   )
 
   return (
-    <div className="quiz-intro-page">
+    <div className="container">
+      <div className="quiz-intro-toolbar">
+        <button onClick={() => nav('/')} className="back-btn">
+          ← Back
+        </button>
+      </div>
       <h1>{quiz.title ?? `Quiz #${quiz.id}`}</h1>
       <p><strong>Questions:</strong> {quiz.questions_count ?? '—'}</p>
       <button onClick={() => nav(`/quiz/${quizId}/run`)}>Start quiz</button>
