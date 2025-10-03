@@ -24,7 +24,6 @@
 .app-nav a{ padding: 6px 8px; border-radius: 8px; }
 .app-nav a:hover{ background: #f1faf3; text-decoration: none; }
 .app-nav .logout-btn{ margin-left: auto; }
-.app-nav .logout-btn.btn-outline{ border-color: var(--nhs-dark); color: var(--nhs-dark); }
 
 /* === Catalog Page === */
 /* Greeting section on home page */
@@ -62,7 +61,6 @@
 }
 .home-quizzes-list{ margin: 10px 0 0; padding-left: 0; list-style: none; }
 .home-quizzes-list li + li{ margin-top: 6px; }
-.open-quiz-btn{}
 
 /* === Flagged List Page === */
 .flagged-page{ composes: container; } /* (if your setup doesn’t support composes, keep class duplication) */
@@ -100,8 +98,16 @@
 .badge--poor{ background: #fde9ea; color:#9b1c1c; }
 
 /* === Quiz Intro Page === */
-.quiz-intro-page{ max-width: 800px; margin: 24px auto; padding: 16px; }
+
 .quiz-intro-links{ margin-top: 12px; }
+
+/* Quiz Intro Page Toolbar */
+.quiz-intro-toolbar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 16px;
+}
+
 
 /* === Quiz Run Page === */
 .quiz-run-radio {
