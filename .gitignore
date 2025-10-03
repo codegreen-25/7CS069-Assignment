@@ -3,9 +3,12 @@ node_modules/
 dist/
 
 # Laravel
-/vendor/
-/.env
-.env.*
+paramedic-api/vendor/
+paramedic-api/.env
+paramedic-api/.env.*
+paramedic-api/storage/*.key
+paramedic-api/storage/framework/*
+paramedic-api/storage/logs
 
 # Storage & cache
 /storage/*.key
