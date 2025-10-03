@@ -1,0 +1,12 @@
+# Send /api/* to the Laravel public/ for this subsite
+RewriteEngine On
+
+# If request starts with /api/...
+RewriteCond %{REQUEST_URI} ^/api/
+# rewrite to the Laravel public path inside this subsite
+RewriteRule ^api/(.*)$ api/public/$1 [L]
+
+# Otherwise, serve the React SPA (index.html) for client-side routing
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.html [L]

@@ -1,0 +1,19 @@
+# React
+node_modules/
+dist/
+
+# Laravel
+/vendor/
+/.env
+.env.*
+
+# Storage & cache
+/storage/*.key
+/storage/framework/*
+/storage/logs
+
+# System
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
