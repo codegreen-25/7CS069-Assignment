@@ -5,6 +5,7 @@ use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\AttemptController;
 use App\Http\Controllers\FlagController;
 use App\Http\Controllers\TokenAuthController;
+use App\Http\Controllers\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/flags',                  [FlagController::class, 'store']);
     Route::get('/flags',                   [FlagController::class, 'index']);
     Route::delete('/flags/{question}',     [FlagController::class, 'destroyByQuestion']);
+
+    Route::get('/questions/{question}', [QuestionController::class, 'show']);   
+Route::post('/questions/{question}/check', [QuestionController::class, 'check']);
 });
