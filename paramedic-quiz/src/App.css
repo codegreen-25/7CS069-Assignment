@@ -33,10 +33,9 @@
   position: relative;
 }
 
-.brand a {
-  font-weight: 700;
-  letter-spacing: 0.2px;
-  text-decoration: none;
+.brand-logo {
+  height: 40px;        
+  width: auto;
 }
 
 /* Desktop nav */
@@ -117,47 +116,16 @@
   transform: translateY(-6px) rotate(-45deg);
 }
 
-/* Mobile nav */
-@media (max-width: 768px) {
-  .primary-nav {
-    /* hidden by default on mobile; toggled by .is-open */
-    position: absolute;
-    right: 16px;
-    top: 50px;
-    background: #006747;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 10px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-
-    display: none; /* collapsed */
-    flex-direction: column;
-    align-items: stretch;
-    min-width: 200px;
-    padding: 8px;
-    gap: 4px;
-  }
-  .primary-nav.is-open {
-    display: flex; /* expanded */
-  }
-  .primary-nav a,
-  .primary-nav .logout-btn {
-    padding: 10px 12px;
-    border-radius: 8px;
-    text-align: left;
-  }
-  .primary-nav a:hover,
-  .primary-nav .logout-btn:hover {
-    background: rgba(255,255,255,0.12);
-  }
-
-  .hamburger {
-    display: inline-block;
-  }
-}
-
-
 /* === Catalog Page === */
 /* Greeting section on home page */
+/* Homepage greeting logo */
+.home-logo {
+  display: block;
+  max-width: 400px;
+  margin: 0 auto 40px auto;
+  border-radius: 20px;
+}
+
 .home-greeting {
   margin-bottom: 24px;
   text-align: left;
@@ -325,3 +293,51 @@
 }
 .login-error, .register-error{ color: #c83532; margin-top: 12px; }
 .login-register-link, .register-login-link{ margin-top: 12px; }
+
+/*Responsiveness*/
+
+
+@media (max-width: 768px) {
+  /* Mobile nav */
+  .primary-nav {
+    /* hidden by default on mobile; toggled by .is-open */
+    position: absolute;
+    right: 16px;
+    top: 50px;
+    background: #006747;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+
+    display: none; /* collapsed */
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 200px;
+    padding: 8px;
+    gap: 4px;
+  }
+  .primary-nav.is-open {
+    display: flex; /* expanded */
+  }
+  .primary-nav a,
+  .primary-nav .logout-btn {
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-align: left;
+  }
+  .primary-nav a:hover,
+  .primary-nav .logout-btn:hover {
+    background: rgba(255,255,255,0.12);
+  }
+
+  .hamburger {
+    display: inline-block;
+  }
+
+  /* Homepage logo */
+  .home-logo {
+    max-width: 90%;    
+    max-height: 150px; 
+    margin-bottom: 24px;
+}
+}

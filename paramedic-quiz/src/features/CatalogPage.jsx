@@ -23,6 +23,7 @@ export default function CatalogPage(){
 
   return (
     <div className="container">
+      <img src="/logo.png" alt="Code Green Quiz logo" className="home-logo" />
             {user && (
         <section className="home-greeting card">
           <h2>

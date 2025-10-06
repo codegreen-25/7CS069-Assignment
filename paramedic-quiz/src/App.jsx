@@ -38,7 +38,7 @@ function Nav() {
       <div className="app-header-inner" ref={menuRef}>
         {/* Brand / Logo */}
         <div className="brand">
-          <Link to="/">CodeGreen Quiz</Link>
+          <Link to="/"><img src="/logo-trimmed.png" alt="Code Green Quiz logo" className="brand-logo" /></Link>
         </div>
 
         {/* Desktop links */}
