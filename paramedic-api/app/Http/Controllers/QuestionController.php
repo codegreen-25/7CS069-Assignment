@@ -72,7 +72,6 @@ class QuestionController extends Controller
             'correctAnswerText'   => $correct->text,
             'chosenAnswerId'      => $chosen->id,
             'chosenAnswerText'    => $chosen->text,
-            // only include if your table actually has this column; otherwise leave null
             'explanation'         => $question->explanation ?? null,
         ]);
     }

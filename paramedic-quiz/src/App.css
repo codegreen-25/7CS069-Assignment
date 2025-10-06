@@ -118,7 +118,7 @@
 
 /* === Catalog Page === */
 /* Greeting section on home page */
-/* Homepage greeting logo */
+
 .home-logo {
   display: block;
   max-width: 400px;
@@ -205,13 +205,6 @@
   margin: 8px 0;
   box-shadow: var(--shadow);
 }
-.badge {
-  display:inline-block; padding: .2rem .5rem; border-radius: 999px;
-  background: #eef8f0; color: var(--nhs-dark); font-weight: 700;
-}
-.badge--good{ background: #e8f6ea; color: var(--nhs-green); }
-.badge--warn{ background: #fff6e5; color:#a05a00; }
-.badge--poor{ background: #fde9ea; color:#9b1c1c; }
 
 /* === Quiz Intro Page === */
 
@@ -280,7 +273,7 @@
   padding: 10px 12px;
   box-shadow: var(--shadow);
 }
-.review-stem{ font-weight: 700; color: var(--nhs-dark); }
+.review-stem{ font-weight: 600; color: var(--nhs-dark); }
 .review-explanation{ margin-top: 6px; font-style: italic; color: var(--muted); }
 
 .answer-badge {

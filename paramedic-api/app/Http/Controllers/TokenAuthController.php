@@ -48,9 +48,6 @@ class TokenAuthController extends Controller
         /** @var \App\Models\User $user */
         $user = $request->user();
 
-        // optional: revoke old tokens
-        $user->tokens()->delete();
-
         $token = $user->createToken('web')->plainTextToken;
 
         return response()->json([

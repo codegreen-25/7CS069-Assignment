@@ -7,11 +7,11 @@ export default function ReviewPage() {
   const { state } = useLocation()
   const data = state || { score: 0, total: 0, percentage: 0, review: [] }
 
-  // ✅ flags state
+  // flags state
   const [flaggedSet, setFlaggedSet] = useState(() => new Set())
   const [flagErr, setFlagErr] = useState(null)
 
-  // ✅ load user’s flags once
+  // load user’s flags once
   useEffect(() => {
     let mounted = true
     setFlagErr(null)
@@ -25,7 +25,7 @@ export default function ReviewPage() {
     return () => { mounted = false }
   }, [])
 
-  // ✅ toggle handler
+  // toggle handler
   const toggleFlag = async (questionId) => {
     try {
       if (flaggedSet.has(questionId)) {
@@ -66,7 +66,7 @@ export default function ReviewPage() {
           const correct = r.correctAnswerText ?? '—'
           const isCorrect =
             r.chosenAnswerText != null && r.chosenAnswerText === r.correctAnswerText
-          const isFlagged = flaggedSet.has(r.questionId) // ✅
+          const isFlagged = flaggedSet.has(r.questionId) 
 
           return (
             <li key={r.questionId} className="review-item">

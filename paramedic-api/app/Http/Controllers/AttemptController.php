@@ -42,7 +42,7 @@ public function saveAnswer(Request $req, $attemptId)
     // Validate payload
     $data = $req->validate([
         'questionId'      => ['required','integer'],
-        'chosenAnswerId'  => ['nullable','integer'],  // allow null to “clear” an answer if you want
+        'chosenAnswerId'  => ['nullable','integer'],  
     ]);
 
     // Fetch the attempt, ensure it belongs to the user and is not submitted
@@ -57,7 +57,7 @@ public function saveAnswer(Request $req, $attemptId)
         ->where('quiz_id', $attempt->quiz_id)
         ->firstOrFail();
 
-    // (Optional) ensure chosenAnswerId is an answer for this question
+    // Ensure chosenAnswerId is an answer for this question
     if (!empty($data['chosenAnswerId'])) {
         $valid = \DB::table('answers')
             ->where('id', $data['chosenAnswerId'])
@@ -96,7 +96,7 @@ public function submit(Request $req, $id)
         ->count();
 
     if ($answered < $total) {
-        // Optionally list which are missing
+        // List which are missing
         $allQ = Question::where('quiz_id', $attempt->quiz_id)->pluck('id')->all();
         $answeredQ = AttemptItem::where('attempt_id', $attempt->id)
                         ->whereNotNull('chosen_answer_id')
