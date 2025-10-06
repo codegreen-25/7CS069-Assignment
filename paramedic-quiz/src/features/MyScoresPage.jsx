@@ -10,7 +10,7 @@ export default function MyScoresPage() {
   }, [])
 
   return (
-    <div className="my-scores-page">
+    <div className="container">
       <h1>My scores</h1>
 
       {loading && <p>Loading…</p>}

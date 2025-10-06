@@ -61,9 +61,6 @@ useEffect(() => {
 
 
   // 2) Fetch the current question when index changes (or after attempt ready)
-// Fetch the current question whenever quizId/index/total changes.
-// Do NOT require attemptId here (we now create attempts lazily on first answer).
-// === NEW cached fetch effect ===
 useEffect(() => {
   if (total === null) return
 
@@ -107,11 +104,11 @@ useEffect(() => {
     .finally(() => {
       if (!mounted) return
       setIsFetching(false)
-      setFirstQuestionLoading(false)    // ✅ first fetch finished (ok or error)
+      setFirstQuestionLoading(false)    
     })
 
   return () => { mounted = false }
-}, [quizId, index, total])  // ← do NOT include attemptId
+}, [quizId, index, total])  
 
 
     useEffect(() => {
@@ -221,7 +218,7 @@ if (!question) {
 
 
 return (
-  <div className="quiz-run-page">
+  <div className="container">
     <div className="quiz-run-toolbar">
       <button className="btn btn-outline" onClick={()=>nav(`/quiz/${quizId}`)}>← Exit</button>
       <button className="btn btn-flag" onClick={toggleFlag} aria-pressed={flagged}>

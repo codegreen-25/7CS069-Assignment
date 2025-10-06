@@ -43,7 +43,7 @@ export default function ReviewPage() {
   }
 
   return (
-    <div className="review-page">
+    <div className="container">
       <h1>Results</h1>
       <p>
         <strong>Score:</strong> {data.score} / {data.total} ({data.percentage}%)
