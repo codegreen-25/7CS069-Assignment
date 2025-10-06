@@ -230,7 +230,11 @@ return (
     </div>
 
     <h2 className="quiz-run-question-title">Question {index + 1}</h2>
-    <p className="quiz-run-stem">{question.stem}</p>
+    {/* Render HTML from DB so <br>, <strong> etc is rendered */}
+    <div
+      className="quiz-run-stem"
+      dangerouslySetInnerHTML={{ __html: question.stem || '' }}
+    />
 
     <ul className="quiz-run-answers">
       {question.answers.map(a => {

@@ -72,7 +72,12 @@ export default function ReviewPage() {
             <li key={r.questionId} className="review-item">
               {/* row header with flag toggle */}
               <div className="review-item-header">
-                <div className="review-stem">{r.stem}</div>
+                {/* Render HTML from DB so <br>, <strong> etc is rendered */}
+                  <div
+                    className="review-stem"
+                    dangerouslySetInnerHTML={{ __html: r.stem || '' }}
+                  />
+
 
                 <button
                   type="button"

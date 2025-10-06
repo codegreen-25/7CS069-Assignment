@@ -42,16 +42,29 @@ export default function CatalogPage(){
           <h2 className="home-cs-title">{cs.title}</h2>
           <p className="home-cs-description">{cs.description}</p>
 
-          {(cs.quizzes || []).length ? (
-            <ul className="home-quizzes-list">
-              {cs.quizzes.map(q => (
+        {(cs.quizzes || []).length ? (
+          <ul className="home-quizzes-list">
+            {cs.quizzes.map((q) => {
+              const label = q.title?.trim() || 'Untitled Quiz'
+
+              return (
                 <li key={q.id}>
-                  {/* navigate with the QUIZ ID */}
-                  <button className="open-qz-btn"><Link to={`/quiz/${q.id}`}>Open quiz #{q.id}</Link></button>
+                  <Link
+                    className="open-qz-btn"
+                    to={`/quiz/${q.id}`}
+                    data-discover="true"
+                  >
+                    {label}
+                  </Link>
                 </li>
-              ))}
-            </ul>
-          ) : <p>No quizzes in this case study.</p>}
+              )
+            })}
+          </ul>
+        ) : (
+          <p>No quizzes in this case study.</p>
+        )}
+
+
         </div>
       ))}
     </div>

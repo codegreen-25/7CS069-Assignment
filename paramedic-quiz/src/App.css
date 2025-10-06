@@ -161,6 +161,25 @@
 .home-quizzes-list{ margin: 10px 0 0; padding-left: 0; list-style: none; }
 .home-quizzes-list li + li{ margin-top: 6px; }
 
+.open-qz-btn {
+  display: block;                /* full clickable area */
+  align-items: center;
+  gap: .5rem;
+  border-radius: 10px;
+  border: 1px solid #00A499;
+  background: #ffffff;
+  color: #00A499;
+  padding: .6rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .02s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+  box-shadow: 0 1px 0 rgba(0,0,0,.02);
+}
+.open-qz-btn:hover { box-shadow: var(--shadow); }
+.open-qz-btn:active { transform: translateY(1px); }
+
+
 /* Flagged List Page */
 .flagged-list{ list-style: none; padding: 0; }
 .flagged-item{

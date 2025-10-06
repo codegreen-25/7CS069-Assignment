@@ -44,7 +44,7 @@ export default function QuestionPreviewPage(){
   if (!q) return <div className="quiz-intro-notfound">Question not found. <Link to="/">Back</Link></div>
 
   return (
-    <div className="quiz-run-page">
+    <div className="container">
       <div className="quiz-run-toolbar">
         <button onClick={() => nav('/account/flags')} className="back-btn">← Back</button>
         <button className="flag-btn" onClick={toggleFlag} aria-pressed={flagged}>
@@ -56,7 +56,11 @@ export default function QuestionPreviewPage(){
       </div>
 
       <h2 className="quiz-run-question-title">Question preview</h2>
-      <p className="quiz-run-stem">{q.stem}</p>
+          {/* Render HTML from DB so <br>, <strong> etc is rendered */}
+        <div
+          className="preview-stem"
+          dangerouslySetInnerHTML={{ __html: q.stem || '' }}
+        />
 
       <ul className="quiz-run-answers">
         {q.answers.map(a => (

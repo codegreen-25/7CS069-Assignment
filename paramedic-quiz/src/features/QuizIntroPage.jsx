@@ -32,7 +32,7 @@ export default function QuizIntroPage() {
           ← Back
         </button>
       </div>
-      <h1>{quiz.title ?? `Quiz #${quiz.id}`}</h1>
+      <h1>{quiz.title ?? `Quiz #${quiz.title}`}</h1>
       <p><strong>Questions:</strong> {quiz.questions_count ?? '—'}</p>
       <button onClick={() => nav(`/quiz/${quizId}/run`)}>Start quiz</button>
       <div className="quiz-intro-links">

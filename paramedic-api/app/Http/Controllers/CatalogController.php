@@ -11,26 +11,16 @@ use App\Models\AttemptItem;
 
 class CatalogController extends Controller
 {
-    // List case studies + their quizzes (id only)
     public function index() {
-        // Return case studies with an array of quiz ids (no titles needed)
-        $caseStudies = CaseStudy::select('id','title','description')
-            ->with(['quizzes:id,case_study_id'])
+        $caseStudies = CaseStudy::query()
+            ->select(['id','title','description'])
+            ->with(['quizzes' => function ($q) {
+                $q->select(['id','case_study_id','title']);
+            }])
             ->get();
 
-        // Map quizzes to just {id}
-        $data = $caseStudies->map(function($cs){
-            return [
-                'id' => $cs->id,
-                'title' => $cs->title,
-                'description' => $cs->description,
-                'quizzes' => $cs->quizzes->map(fn($q)=> ['id'=>$q->id])->values(),
-                'quizzes_count' => $cs->quizzes->count(),
-            ];
-        });
-
-        return response()->json($data);
-}
+        return response()->json($caseStudies);
+    }
 
     public function quiz($id) {
         $count = \App\Models\Question::where('quiz_id', $id)->count();

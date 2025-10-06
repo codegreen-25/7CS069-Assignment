@@ -32,7 +32,11 @@ export default function FlaggedListPage() {
             <div className="flagged-item-title">
               {q.caseStudy.title} › {q.quiz.title}
             </div>
-            <div className="flagged-item-stem">{q.stem}</div>
+            {/* Render HTML from DB so <br>, <strong> etc is rendered */}
+               <div
+                className="quiz-run-stem"
+                dangerouslySetInnerHTML={{ __html: q.stem || '' }}
+              />
             <div className="flagged-item-actions">
               <button onClick={() => open(q)}>Open</button>
               <button className="btn btn-danger" onClick={()=>unflag(q)}>Remove flag</button>
