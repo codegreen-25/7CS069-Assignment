@@ -7,9 +7,9 @@ It delivers realistic case-based quizzes that help users practise decision-makin
 
 The platform is built as a full-stack web application consisting of:<ul>
 
-<li>Frontend: React (Vite)</li>
+<li>Frontend: React (Vite) - paramedic-quiz folder</li>
 
-<li>Backend: Laravel (PHP)</li>
+<li>Backend: Laravel (PHP) - paramedic-api folder</li>
 
 <li>Database: MySQL</li></ul>
 
