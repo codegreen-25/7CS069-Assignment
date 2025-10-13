@@ -2,8 +2,9 @@
 return [
     'paths' => ['api/*'],
     'allowed_methods' => ['*'],
-    'allowed_origins' => ['http://localhost:5173'],
-    'allowed_headers' => ['*'],   // <- allow Authorization, Content-Type, etc
+    'allowed_origins' => ['https://summative.codegreenquiz.com',
+        'https://formative.codegreenquiz.com'],
+    'allowed_headers' => ['*'],  
     'exposed_headers' => [],
     'max_age' => 0,
     'supports_credentials' => false,
