@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\Flag;
 use Illuminate\Http\Request;
 use App\Models\AttemptItem;
+use App\Models\Attempt;
 
 class CatalogController extends Controller
 {
@@ -35,10 +36,11 @@ class CatalogController extends Controller
         ]);
     }
 
-public function singleQuestion(\Illuminate\Http\Request $req, $quizId)
+public function singleQuestion(Request $req, $quizId)
 {
     $index = (int) $req->query('index', 0);
     $attemptId = $req->query('attemptId');
+    $userId    = optional($req->user())->id;
 
     $base = Question::where('quiz_id', $quizId)
             ->orderBy('order_index')
@@ -63,26 +65,37 @@ public function singleQuestion(\Illuminate\Http\Request $req, $quizId)
     $q = (clone $base)->skip($index)->take(1)->firstOrFail();
     $q->load('answers:id,question_id,text');
 
-    $flagged = Flag::where('user_id', $req->user()->id ?? null)
-        ->where('question_id', $q->id)
-        ->exists();
+    $flagged = false;
+    if ($userId) {
+        $flagged = Flag::where('user_id', $userId)
+            ->where('question_id', $q->id)
+            ->exists();
+    }
 
     $prevChosen = null;
-    if ($attemptId) {
-        $prevChosen = AttemptItem::where('attempt_id', $attemptId)
-            ->where('question_id', $q->id)
-            ->value('chosen_answer_id');
+    if ($attemptId && $userId) {
+        $attempt = Attempt::where('id', $attemptId)
+            ->where('quiz_id', $quizId)
+            ->where('user_id', $userId)
+            ->whereNull('submitted_at')
+            ->first();
+
+        if ($attempt) {
+            $prevChosen = AttemptItem::where('attempt_id', $attempt->id)
+                ->where('question_id', $q->id)
+                ->value('chosen_answer_id');
+        }
     }
 
     return response()->json([
         'id'        => $q->id,
         'order_index' => $q->order_index,
         'stem'      => $q->stem,
-        'answers'   => $q->answers->map(fn($a)=>['id'=>$a->id, 'text'=>$a->text])->values(),
+        'answers'   => $q->answers->map(fn ($a) => ['id' => $a->id, 'text' => $a->text])->values(),
         'flagged'   => $flagged,
         'previouslyChosenAnswerId' => $prevChosen,
-        'total'     => $total,      // optional convenience for the client
-        'index'     => $index       // echo back
+        'total'     => $total,
+        'index'     => $index,
     ]);
 }
 }

@@ -224,27 +224,29 @@ return (
     />
 
     <ul className="quiz-run-answers">
-      {question.answers.map(a => {
-        const isSelected = chosen === a.id
-        return (
-          <li
-            key={a.id}
-            className={`quiz-run-answer ${isSelected ? 'selected' : ''}`}
-            onClick={() => onChoose(a.id)}
-          >
-            {/* hide the radio but keep it for accessibility */}
-            <input
-              type="radio"
-              name="opt"
-              checked={isSelected}
-              onChange={() => onChoose(a.id)}
-              className="quiz-run-radio"
-            />
-            <span>{a.text}</span>
-          </li>
-        )
-      })}
+      {question.answers.map((a) => (
+        <li
+          key={a.id}
+          className={`quiz-run-answer ${chosen === a.id ? 'answer--selected' : ''}`}
+          onClick={() => onChoose(a.id)}      
+          role="radio"
+          aria-checked={chosen === a.id}
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onChoose(a.id) }}
+        >
+          <label className="answer-label">{a.text}</label>
+
+          <input
+            type="radio"
+            name="opt"
+            checked={chosen === a.id}
+            onChange={() => onChoose(a.id)}
+            className="sr-only"   // visually hidden, see CSS
+          />
+        </li>
+      ))}
     </ul>
+
 
 
     {navError && <p className="quiz-run-error">{navError}</p>}
