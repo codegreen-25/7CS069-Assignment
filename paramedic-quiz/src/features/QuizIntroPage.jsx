@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import { getQuiz } from '../api/quiz'
+import BackButton from '../components/BackButton';
 
 export default function QuizIntroPage() {
   const { quizId } = useParams()
@@ -28,9 +29,7 @@ export default function QuizIntroPage() {
   return (
     <div className="container">
       <div className="quiz-intro-toolbar">
-        <button onClick={() => nav('/')} className="back-btn">
-          ← Back
-        </button>
+        <BackButton />
       </div>
       <h1>{quiz.title ?? `Quiz #${quiz.title}`}</h1>
       <p><strong>Questions:</strong> {quiz.questions_count ?? '—'}</p>

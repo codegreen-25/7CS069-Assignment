@@ -50,7 +50,6 @@
   text-decoration: none;
   padding: 6px 8px;
   border-radius: 6px;
-
   /* override global link styles */
   color: #fff;               
   font-weight: 500;
@@ -114,6 +113,10 @@
 
 .hamburger.is-open span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
+}
+
+.back-btn {
+  margin-bottom: 15px;
 }
 
 /* === Catalog Page === */

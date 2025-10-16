@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { myAttempts } from '../api/attempts'
+import BackButton from '../components/BackButton';
 
 export default function MyScoresPage() {
   const [items, setItems] = useState([])
@@ -11,6 +12,7 @@ export default function MyScoresPage() {
 
   return (
     <div className="container">
+      <BackButton />
       <h1>My scores</h1>
 
       {loading && <p>Loading…</p>}

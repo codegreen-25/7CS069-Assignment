@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { listFlags, unflagQuestion } from '../api/flags'
+import BackButton from '../components/BackButton';
 
 export default function FlaggedListPage() {
   const nav = useNavigate()
@@ -22,6 +23,7 @@ export default function FlaggedListPage() {
 
   return (
     <div className="flagged-page container">
+      <BackButton />
       <h1>Flagged questions</h1>
       {loading && <p>Loading…</p>}
       {!loading && items.length === 0 && <p>No flags yet.</p>}
