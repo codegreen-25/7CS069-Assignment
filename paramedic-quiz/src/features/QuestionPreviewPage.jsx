@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import { getQuestion, checkQuestion } from '../api/questions'
-import { flagQuestion, unflagQuestion } from '../api/flags'
+import BackButton from '../components/BackButton';
+import FlagButton from '../components/FlagButton'
 
 export default function QuestionPreviewPage(){
   const { questionId } = useParams()
@@ -12,12 +13,16 @@ export default function QuestionPreviewPage(){
 
   const [selected, setSelected] = useState(null)
   const [result, setResult] = useState(null) // { correct, correctAnswerText, chosenAnswerText, explanation }
-  const [flagged, setFlagged] = useState(false)
+   const [flagged, setFlagged] = useState(false)
 
   useEffect(() => {
     setErr(null); setLoading(true)
     getQuestion(Number(questionId))
-      .then(data => { setQ(data) })
+      .then(data => { setQ(data) 
+        if (typeof data?.flagged !== 'undefined') {
+          setFlagged(Boolean(data.flagged))
+        } 
+      })
       .catch(e => setErr(e?.response?.data?.message || e.message))
       .finally(() => setLoading(false))
   }, [questionId])
@@ -32,13 +37,6 @@ export default function QuestionPreviewPage(){
     }
   }
 
-  const toggleFlag = async () => {
-    try {
-      if (!flagged) { await flagQuestion(Number(questionId)); setFlagged(true) }
-      else { await unflagQuestion(Number(questionId)); setFlagged(false) }
-    } catch (e) { console.error(e) }
-  }
-
   if (loading) return <div className="quiz-intro-loading">Loading…</div>
   if (err) return <div className="quiz-intro-error">Error: {err}</div>
   if (!q) return <div className="quiz-intro-notfound">Question not found. <Link to="/">Back</Link></div>
@@ -46,10 +44,8 @@ export default function QuestionPreviewPage(){
   return (
     <div className="container">
       <div className="quiz-run-toolbar">
-        <button onClick={() => nav('/account/flags')} className="back-btn">← Back</button>
-        <button className="flag-btn" onClick={toggleFlag} aria-pressed={flagged}>
-          {flagged ? '★ Unflag' : '☆ Flag'}
-        </button>
+        <BackButton />
+        <FlagButton questionId={q?.id}  initialFlagged={flagged}  onChange={setFlagged} className='flag-btn'/>
         <div className="quiz-info">
           <strong>{q.quiz?.caseStudy?.title}</strong> › {q.quiz?.title}
         </div>

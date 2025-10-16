@@ -115,9 +115,10 @@
   transform: translateY(-6px) rotate(-45deg);
 }
 
-.back-btn {
+.back-btn, .flag-btn, .exit-btn {
   margin-bottom: 15px;
 }
+
 
 /* === Catalog Page === */
 /* Greeting section on home page */

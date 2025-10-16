@@ -1,6 +1,7 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { listFlags, flagQuestion, unflagQuestion } from '../api/flags'  // ✅ add
+import { listFlags } from '../api/flags'
+import FlagButton from '../components/FlagButton'
 
 export default function ReviewPage() {
   const { quizId } = useParams()
@@ -24,23 +25,6 @@ export default function ReviewPage() {
       .catch(e => setFlagErr(e?.response?.data?.message || e.message))
     return () => { mounted = false }
   }, [])
-
-  // toggle handler
-  const toggleFlag = async (questionId) => {
-    try {
-      if (flaggedSet.has(questionId)) {
-        await unflagQuestion(questionId)
-        const next = new Set(flaggedSet); next.delete(questionId)
-        setFlaggedSet(next)
-      } else {
-        await flagQuestion(questionId)
-        const next = new Set(flaggedSet); next.add(questionId)
-        setFlaggedSet(next)
-      }
-    } catch (e) {
-      setFlagErr(e?.response?.data?.message || e.message)
-    }
-  }
 
   return (
     <div className="container">
@@ -79,15 +63,20 @@ export default function ReviewPage() {
                   />
 
 
-                <button
-                  type="button"
+                <FlagButton
+                  questionId={r.questionId}
+                  initialFlagged={isFlagged}
+                  onChange={(next) => {
+                    setFlagErr(null)
+                    setFlaggedSet(prev => {
+                      const s = new Set(prev)
+                      if (next) s.add(r.questionId)
+                      else s.delete(r.questionId)
+                      return s
+                    })
+                  }}
                   className="btn btn-flag"
-                  aria-pressed={isFlagged}
-                  onClick={() => toggleFlag(r.questionId)}
-                  title={isFlagged ? 'Unflag question' : 'Flag question'}
-                >
-                  {isFlagged ? '★ Unflag' : '☆ Flag'}
-                </button>
+                />
               </div>
 
               <div>

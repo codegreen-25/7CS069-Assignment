@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useNavigate, useParams, useSearchParams, Link } from 'react-router-dom'
 import { getQuiz, getQuestionByIndex } from '../api/quiz'
 import { createAttempt, saveAnswer, submitAttempt } from '../api/attempts'
-import { flagQuestion, unflagQuestion } from '../api/flags'
+import FlagButton from '../components/FlagButton'
 
 export default function QuizRunPage(){
   const { quizId } = useParams()
@@ -147,19 +147,8 @@ useEffect(() => {
       }
     }
 
-  // 4) Flag toggle
-  const toggleFlag = async () => {
-    if (!question) return
-    try {
-      if (!flagged) await flagQuestion(question.id)
-      else await unflagQuestion(question.id)
-      setFlagged(!flagged)
-    } catch (e) {
-      console.error('flag toggle failed', e)
-    }
-  }
 
-  // 5) Navigation
+  // 4) Navigation
   const onBack = () => { setNavError(null); setIndex(i => Math.max(0, i - 1)) }
   const onNext = () => {
   if (chosen == null) {                 // ✅ block if nothing chosen
@@ -171,7 +160,7 @@ useEffect(() => {
 }
 
 
-  // 6) Submit on the LAST question only
+  // 5) Submit on the LAST question only
 const onSubmit = async () => {
   if (chosen == null) {                 // ✅ block if last is unanswered
     setNavError('Please select an answer before submitting.')
@@ -220,10 +209,8 @@ if (!question) {
 return (
   <div className="container">
     <div className="quiz-run-toolbar">
-      <button className="btn btn-outline" onClick={()=>nav(`/quiz/${quizId}`)}>← Exit</button>
-      <button className="btn btn-flag" onClick={toggleFlag} aria-pressed={flagged}>
-        {flagged ? '★ Unflag' : '☆ Flag'}
-      </button>
+      <button className="btn btn-outline exit-btn" onClick={()=>nav(`/quiz/${quizId}`)}>← Exit</button>
+      <FlagButton questionId={question?.id}  initialFlagged={flagged}  onChange={setFlagged}/>
       <div className="quiz-info">
         {title ? <strong>{title}</strong> : null} &nbsp; Q{index + 1}/{total}
       </div>
