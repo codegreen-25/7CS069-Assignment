@@ -4,18 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Answer;
+use App\Models\Flag;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
    
-    public function show(Question $question)
+    public function show(Request $request, Question $question)
     {
         $question->load([
             'answers:id,question_id,text', 
             'quiz:id,case_study_id,title',
             'quiz.caseStudy:id,title'
         ]);
+
+        $userId  = optional($request->user())->id;
+        $flagged = false;
+
+        if ($userId) {
+            $flagged = Flag::where('user_id', $userId)
+                ->where('question_id', $question->id)
+                ->exists();
+        }
 
         return response()->json([
             'id'   => $question->id,
@@ -31,7 +41,8 @@ class QuestionController extends Controller
             'answers' => $question->answers->map(fn($a) => [
                 'id'   => $a->id,
                 'text' => $a->text,
-            ]),
+            ])->values(),
+            'flagged' => $flagged,
         ]);
     }
 

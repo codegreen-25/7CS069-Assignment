@@ -13,15 +13,14 @@ export default function QuestionPreviewPage(){
 
   const [selected, setSelected] = useState(null)
   const [result, setResult] = useState(null) // { correct, correctAnswerText, chosenAnswerText, explanation }
-   const [flagged, setFlagged] = useState(false)
+  const [flagged, setFlagged] = useState(false)
 
   useEffect(() => {
     setErr(null); setLoading(true)
     getQuestion(Number(questionId))
-      .then(data => { setQ(data) 
-        if (typeof data?.flagged !== 'undefined') {
-          setFlagged(Boolean(data.flagged))
-        } 
+      .then(data => { 
+      setQ(data)
+      setFlagged(Boolean(data.flagged))
       })
       .catch(e => setErr(e?.response?.data?.message || e.message))
       .finally(() => setLoading(false))
