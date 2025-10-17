@@ -6,6 +6,7 @@ use App\Http\Controllers\AttemptController;
 use App\Http\Controllers\FlagController;
 use App\Http\Controllers\TokenAuthController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\AccountController;
 
 
 /*
@@ -31,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     Route::get('/user', fn (\Illuminate\Http\Request $request) => $request->user());
+    Route::patch('/user', [AccountController::class, 'update']);
 
 
     Route::get('/case-studies',            [CatalogController::class, 'index']);

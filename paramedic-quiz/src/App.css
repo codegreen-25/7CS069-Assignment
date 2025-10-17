@@ -323,8 +323,44 @@
 .login-error, .register-error{ color: #c83532; margin-top: 12px; }
 .login-register-link, .register-login-link{ margin-top: 12px; }
 
-/*Responsiveness*/
+/*Profile Page */
+.profile-inline-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
 
+.profile-name {
+  font-size: 1.1rem;
+}
+
+.profile-input {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.profile-label {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.success-notice {
+  color: #009639; /* NHS green */
+  margin-top: 12px;
+}
+
+.error-notice {
+  color: crimson;
+  margin-top: 12px;
+}
+
+
+
+/*Responsiveness*/
 
 @media (max-width: 768px) {
   /* Mobile nav */

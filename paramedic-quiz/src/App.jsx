@@ -13,6 +13,7 @@ import ReviewPage from './features/ReviewPage'
 import MyScoresPage from './features/MyScoresPage'     
 import FlaggedListPage from './features/FlaggedListPage'
 import QuestionPreviewPage from './features/QuestionPreviewPage'
+import ProfilePage from './features/ProfilePage'
 import './App.css'
 
 function Nav() {
@@ -46,6 +47,7 @@ function Nav() {
           <NavLink to="/" onClick={handleLinkClick}>Home</NavLink>
           {user && <NavLink to="/account/flags" onClick={handleLinkClick}>Flags</NavLink>}
           {user && <NavLink to="/account/scores" onClick={handleLinkClick}>My scores</NavLink>}
+          {user && <Link to="/account/profile" onClick={handleLinkClick}>Profile</Link>}
           {!user && <NavLink to="/login" onClick={handleLinkClick}>Login</NavLink>}
           {!user && <NavLink to="/register" onClick={handleLinkClick}>Register</NavLink>}
           {user && (
@@ -88,6 +90,7 @@ export default function App(){
           <Route path="/quiz/:quizId" element={<Protected><QuizIntroPage/></Protected>} />
           <Route path="/quiz/:quizId/run" element={<Protected><QuizRunPage/></Protected>} />
           <Route path="/quiz/:quizId/review/:attemptId" element={<Protected><ReviewPage/></Protected>} />
+          <Route path="/account/profile" element={<Protected><ProfilePage/></Protected>} />
           <Route path="/account/scores" element={<Protected><MyScoresPage/></Protected>} />
           <Route path="/account/flags" element={<Protected><FlaggedListPage/></Protected>} />
           <Route path="/question/:questionId" element={<Protected><QuestionPreviewPage/></Protected>} />
