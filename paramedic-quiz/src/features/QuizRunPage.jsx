@@ -228,21 +228,22 @@ return (
         <li
           key={a.id}
           className={`quiz-run-answer ${chosen === a.id ? 'answer--selected' : ''}`}
-          onClick={() => onChoose(a.id)}      
           role="radio"
           aria-checked={chosen === a.id}
           tabIndex={0}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onChoose(a.id) }}
         >
-          <label className="answer-label">{a.text}</label>
-
           <input
             type="radio"
+            id={`answer-${a.id}`}
             name="opt"
             checked={chosen === a.id}
             onChange={() => onChoose(a.id)}
-            className="sr-only"   // visually hidden, see CSS
+            className="sr-only"
           />
+          <label htmlFor={`answer-${a.id}`} className="answer-label">
+            {a.text}
+          </label>
         </li>
       ))}
     </ul>

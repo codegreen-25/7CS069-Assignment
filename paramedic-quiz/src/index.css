@@ -101,17 +101,6 @@ button:disabled,
   border-color: var(--danger);
 }
 
-/* .btn-flag{
-  background: #f3fff6;
-  color: var(--nhs-dark);
-  border-color: var(--nhs-light);
-}
-.btn-flag[aria-pressed="true"]{
-  background: var(--nhs-light);
-  color: #0b2d1f;
-  border-color: var(--nhs-light);
-} */
-
 /* Focus ring (accessible) */
 :focus-visible{
   outline: 3px solid var(--focus);
