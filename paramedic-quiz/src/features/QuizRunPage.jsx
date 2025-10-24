@@ -252,8 +252,8 @@ return (
     {navError && <p className="quiz-run-error">{navError}</p>}
 
     <div className="quiz-run-nav">
-      {!isFirst && <button className="btn btn-outline" onClick={onBack}>Back</button>}
-      {!isLast  && <button className="btn btn-outline" onClick={onNext}>Next</button>}
+      {!isFirst && <button className="btn" onClick={onBack}>Back</button>}
+      {!isLast  && <button className="btn" onClick={onNext}>Next</button>}
       {isLast   && <button className="btn btn-primary" onClick={onSubmit}>Submit Quiz</button>}
     </div>
   </div>
