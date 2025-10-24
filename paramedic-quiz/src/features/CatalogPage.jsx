@@ -11,12 +11,14 @@ export default function CatalogPage(){
   const [loading, setLoading] = useState(true)
   const [err, setErr] = useState(null)
 
-  useEffect(()=>{
-    getCaseStudies()
-      .then(setItems)
-      .catch(e => setErr(e?.response?.data?.message || e.message))
-      .finally(()=>setLoading(false))
-  },[])
+useEffect(() => {
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => getCaseStudies().then(setItems).catch(e => setErr(e?.response?.data?.message || e.message)).finally(() => setLoading(false)))
+  } else {
+    getCaseStudies().then(setItems).catch(e => setErr(e?.response?.data?.message || e.message)).finally(() => setLoading(false))
+  }
+}, [])
+
 
   if (loading) return <p>Loading…</p>
   if (err) return <p className="error-notice">{err}</p>
