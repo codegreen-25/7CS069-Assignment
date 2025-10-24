@@ -228,10 +228,6 @@ return (
         <li
           key={a.id}
           className={`quiz-run-answer ${chosen === a.id ? 'answer--selected' : ''}`}
-          role="radio"
-          aria-checked={chosen === a.id}
-          tabIndex={0}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onChoose(a.id) }}
         >
           <input
             type="radio"
@@ -247,9 +243,7 @@ return (
         </li>
       ))}
     </ul>
-
-
-
+    
     {navError && <p className="quiz-run-error">{navError}</p>}
 
     <div className="quiz-run-nav">
