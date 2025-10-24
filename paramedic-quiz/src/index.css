@@ -95,27 +95,10 @@ button:disabled,
 }
 .btn-primary:hover{ background: var(--btn-primary-hover); }
 
-.btn-outline{
-  background: transparent;
-  color: var(--btn-outline-text);
-  border-color: var(--btn-outline-border);
-}
-
 .btn-danger{
   background: var(--danger);
   color: var(--danger-contrast);
   border-color: var(--danger);
-}
-
-.btn-flag{
-  background: #f3fff6;
-  color: var(--nhs-dark);
-  border-color: var(--nhs-light);
-}
-.btn-flag[aria-pressed="true"]{
-  background: var(--nhs-light);
-  color: #0b2d1f;
-  border-color: var(--nhs-light);
 }
 
 /* Focus ring (accessible) */

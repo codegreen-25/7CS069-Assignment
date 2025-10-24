@@ -1,19 +1,19 @@
 import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense, lazy } from 'react'
 import { AuthProvider } from './auth/AuthContext'
 import { useAuth } from './auth/AuthContext'
 import Protected from './auth/Protected'
 
 import Login from './auth/Login'
 import Register from './auth/Register'
-import CatalogPage from './features/CatalogPage'
-import QuizIntroPage from './features/QuizIntroPage'
-import QuizRunPage from './features/QuizRunPage'
-import ReviewPage from './features/ReviewPage'
-import MyScoresPage from './features/MyScoresPage'     
-import FlaggedListPage from './features/FlaggedListPage'
-import QuestionPreviewPage from './features/QuestionPreviewPage'
-import ProfilePage from './features/ProfilePage'
+const CatalogPage        = lazy(() => import('./features/CatalogPage'))
+const QuizIntroPage      = lazy(() => import('./features/QuizIntroPage'))
+const QuizRunPage        = lazy(() => import('./features/QuizRunPage'))
+const ReviewPage         = lazy(() => import('./features/ReviewPage'))
+const MyScoresPage       = lazy(() => import('./features/MyScoresPage'))
+const FlaggedListPage    = lazy(() => import('./features/FlaggedListPage'))
+const QuestionPreviewPage= lazy(() => import('./features/QuestionPreviewPage'))
+const ProfilePage        = lazy(() => import('./features/ProfilePage'))
 import './App.css'
 
 function Nav() {
@@ -80,6 +80,7 @@ export default function App(){
     <AuthProvider>
       <BrowserRouter>
         <Nav/>
+        <Suspense fallback={<p>Loading…</p>}>
         <Routes>
           {/* public */}
           <Route path="/login" element={<Login/>}/>
@@ -95,6 +96,7 @@ export default function App(){
           <Route path="/account/flags" element={<Protected><FlaggedListPage/></Protected>} />
           <Route path="/question/:questionId" element={<Protected><QuestionPreviewPage/></Protected>} />
         </Routes>
+        </Suspense>
       </BrowserRouter>
     </AuthProvider>
   )

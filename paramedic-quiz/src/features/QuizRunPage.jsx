@@ -228,32 +228,27 @@ return (
         <li
           key={a.id}
           className={`quiz-run-answer ${chosen === a.id ? 'answer--selected' : ''}`}
-          onClick={() => onChoose(a.id)}      
-          role="radio"
-          aria-checked={chosen === a.id}
-          tabIndex={0}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onChoose(a.id) }}
         >
-          <label className="answer-label">{a.text}</label>
-
           <input
             type="radio"
+            id={`answer-${a.id}`}
             name="opt"
             checked={chosen === a.id}
             onChange={() => onChoose(a.id)}
-            className="sr-only"   // visually hidden, see CSS
+            className="sr-only"
           />
+          <label htmlFor={`answer-${a.id}`} className="answer-label">
+            {a.text}
+          </label>
         </li>
       ))}
     </ul>
-
-
-
+    
     {navError && <p className="quiz-run-error">{navError}</p>}
 
     <div className="quiz-run-nav">
-      {!isFirst && <button className="btn btn-outline" onClick={onBack}>Back</button>}
-      {!isLast  && <button className="btn btn-outline" onClick={onNext}>Next</button>}
+      {!isFirst && <button className="btn" onClick={onBack}>Back</button>}
+      {!isLast  && <button className="btn" onClick={onNext}>Next</button>}
       {isLast   && <button className="btn btn-primary" onClick={onSubmit}>Submit Quiz</button>}
     </div>
   </div>
