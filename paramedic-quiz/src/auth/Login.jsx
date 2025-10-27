@@ -33,6 +33,7 @@ export default function Login() {
         <label>
           Email<br/>
           <input
+            type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
